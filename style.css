@@ -1,0 +1,486 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: #E7F0DC;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.navbar {
+    height: 10%;
+    width: 100%;
+    background-color: #B6C7AA;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: #1A3636;
+}
+
+.menu {
+    display: flex;
+    background-color: #ACD793;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: auto;
+    height: 5%;
+    width: 20%;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    position: relative;
+    top: 0;
+    z-index: 2;
+    min-width: 250px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.menu a:hover {
+    color: white;
+}
+
+.menu a.active {
+    color: white;
+}
+
+.link {
+    background-color: rgba(218, 218, 235, 0.3);
+    border-bottom: 2px groove rgba(218, 218, 235, 0.7);
+    border-radius: 5px;
+}
+
+.link:hover {
+    color: olivedrab;
+    cursor: pointer;
+}
+
+.container {
+    display: flex;
+    height: 90%;
+    width: 100%;
+    flex-direction: row;
+    position: relative;
+    top: -5vh;
+    z-index: 1;
+    margin-bottom: 0;
+    overflow: hidden;
+}
+
+.map-column {
+    height: 100%;
+    width: 65%;
+}
+
+.text-column {
+    height: 100%;
+    width: 35%;
+    background-color: rgb(215, 227, 216);
+    min-width: 400px;
+}
+
+.map-container {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.text-container {
+    height: calc(94% - 7px);
+    width: 100%;
+    overflow-y: scroll;
+    padding: 5vh;
+    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: none; /* For Internet Explorer and Edge */
+}
+
+.chapter:not(:first-child) {
+    margin-top: 100px;
+}
+
+.text-container::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Opera */
+}
+
+#progress-bar {
+    top: 0;
+    height: 7px;
+    background-color: #ACD793;
+    width: 0%;
+    max-width: 100%;
+}
+
+.navigation-buttons {
+    height: 6%;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+button {
+    color: #799351;
+    background-color: rgb(224, 251, 226);
+    border-radius: 7.5px;
+    border-width: 0px;
+    border-color: olivedrab;
+}
+
+button:hover {
+    border-width: 2px;
+    cursor: pointer;
+}
+
+button:disabled {
+    color: grey;
+    background-color: darkgray;
+    cursor: default;
+}
+
+button:disabled, button:disabled:hover {
+    border: none;
+}
+
+#map {
+    height: 100%;
+    width: 100%;
+}
+
+.montserrat-heading {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.montserrat-h1 {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.montserrat-h2 {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 350;
+    font-style: normal;
+}
+
+.montserrat-p {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+}
+
+#basemapToggle {
+    border-radius: 4px;
+    background-color: white;
+    width: 33px;
+    height: 33px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: lightgray 2px groove;
+}
+
+#basemapToggle:hover {
+    cursor: pointer;
+    background-color: darkgray;
+}
+
+#qButton {
+    border-radius: 50%;
+    background-color: white;
+    color: grey;
+    width: 33px;
+    height: 33px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: lightgray 2px groove;
+}
+
+#qButton:hover {
+    cursor: pointer;
+    background-color: darkgray;
+}
+
+.modal {
+    display: block;
+    visibility: hidden;
+    position: absolute;
+    border-radius: 20px;
+    z-index: 20000;
+    left: 50%;
+    top: 50%;
+    width: 60%;
+    height: 50%;
+    overflow: auto;
+    background-color: rgb(236, 244, 236);
+    transform: translate(-50%, -50%);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    min-width: 500px;
+}
+
+.modal-show {
+    visibility: visible;
+    opacity: 1;
+    height: 60%;
+}
+
+.modal-content {
+    margin: 30px 20px;
+}
+
+.modal-heading {
+    text-align: center;
+}
+
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 35px;
+    font-weight: bold;
+    padding-right: 12px;
+}
+
+.close:hover {
+    cursor: pointer;
+    color: #000;
+}
+
+.default-button {
+color: olivedrab;
+}
+
+.esri-button {
+    color: grey;
+}
+
+.stadia-button {
+    color: yellowgreen;
+}
+
+.leaflet-spotlight-container.circle {
+    border-radius: 50%;
+}
+
+.leaflet-spotlight-container {
+    z-index: -10000;
+    position: absolute;
+    left: 30%;
+    top: 30%;
+    opacity: 0;
+    width: 200px; /* Adjust width as needed */
+    height: 200px; /* Adjust height as needed */
+    -webkit-box-shadow: inset rgba(0, 0, 0, 0.25) 0px 0px 10px 10px, rgba(0, 0, 0, 0.25) 0px 0px 0px 3000px;
+    box-shadow: inset rgba(0, 0, 0, 0.25) 0px 0px 10px 10px, rgba(0, 0, 0, 0.25) 0px 0px 0px 3000px;
+    -o-transition: all 1000ms;
+    transition: all 1000ms;
+    -moz-transition: all 1000ms;
+    -webkit-transition: all 1000ms;
+}
+
+/*saturation*/
+.default-map .leaflet-tile {
+    filter: saturate(1);
+}
+
+.stadia-map .leaflet-tile {
+    filter: saturate(0.3);
+}
+
+.esri-map .leaflet-tile {
+    filter: saturate(1);
+}
+
+.overlay-layer .leaflet-tile {
+    filter: none !important; /* Ensure no saturation is applied */
+}
+
+
+.key {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border: 2px solid #000;
+    border-radius: 5px;
+    background-color: #eee;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    text-align: center;
+    width: 20px;
+    height: 20px;
+}
+
+#esc {
+    font-size: 11px;
+}
+
+.image-container {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 10px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.image-column {
+    flex: 0 0 auto;
+    margin-right: 20px;
+}
+
+.credits-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.description-column {
+    flex: 1;
+    text-align: left;
+}
+
+@media (max-width: 1050px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .navbar {
+        font-size: 2.5rem;
+    }
+
+    .map-column {
+        width: 100%;
+        height: 50%;
+    }
+
+    .text-column {
+        width: 100%;
+        height: 50%;
+    }
+
+    .text-container {
+        height: calc(94% - 7px);
+        padding-top: 3.5px;
+    }
+
+    .menu {
+        width: 50%;
+        max-width: 250px;
+    }
+
+    .modal {
+        width: 70%;
+        height: 70%;
+        min-width: unset;
+        font-size: 12px;
+        scrollbar-width: none; /* For Firefox */
+        -ms-overflow-style: none; /* For Internet Explorer and Edge */
+    }
+
+    .modal::-webkit-scrollbar {
+        display: none; /* For Chrome, Safari, and Opera */
+    }
+}
+
+.custom-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #E7F0DC;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.control-icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+    margin-right: 5px;
+}
+
+.control-tooltip {
+    background-color: #B6C7AA;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    position: absolute;
+    z-index: 10;
+    white-space: nowrap;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.control-panel {
+    display: none; /* Keep initially hidden */
+    position: absolute; /* Position relative to its nearest positioned ancestor */
+    bottom: 0px; /* Adjust based on the toggle button's size and desired offset */
+    left: 0; /* Align to the right edge of its container */
+    width: 300px; /* Adjust width as needed */
+    background-color: #E7F0DC;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 20px;
+    z-index: 1000; /* Ensure it's above other map elements */
+}
+
+.custom-control .control-panel {
+    display: none; /* Initially hide the control panel */
+}
+
+.panel-title {
+    text-align: center; /* Keep center alignment */
+    font-size: 16px; /* Adjust font size to be slightly smaller, more in line with control panel text */
+    font-weight: bold; /* Keep the font bold */
+    padding: 10px 20px; /* Adjust padding to match the control panel's padding, considering the title's context */
+    background-color: #fff; /* Change background color to match the control panel */
+    color: #333; /* Change text color to a darker shade for contrast against the lighter background */
+    font-family: Arial, sans-serif; /* Keep the font family consistent */
+    border-radius: 5px 5px 0 0; /* Apply border-radius to the top corners to align with the control panel's rounded corners */
+    box-shadow: none; /* Remove the box shadow to match the control panel's appearance */
+    border: 1px solid #666; /* Apply a border to match the control panel's border */
+    width: 250px;
+}
+
+/* .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 16px;
+    line-height: 16px;
+    width: 16px;
+    height: 16px;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    border: #fff;
+} */
+
+.overlay-toggle-button {
+    background-color: white;
+    border: 1px solid #666;
+    border-radius: 2px;
+}
