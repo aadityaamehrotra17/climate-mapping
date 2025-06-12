@@ -1,0 +1,11 @@
+storm colour - luca
+section scrolling bug
+mobile responsiveness: modal (heading only)
+home modal content - luca
+conclusion content - luca
+site design: basemap button colour, menu narrow, nav buttons closer, fonts, colors, favicon - luca
+
+optimise code
+add comments
+
+menu nav bug

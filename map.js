@@ -285,6 +285,11 @@ function flyToAndClear(coords, zoom) {
         circleLayers = [];
         cannonsSet2 = false;
     }
+    if (cannonsSetNew) {
+        cannonsList.forEach(layer => map.removeLayer(layer));
+        cannonsList = [];
+        cannonsSetNew = false;
+    }
     if (videoExists) {
         map.removeLayer(videoOverlay);
         videoExists = false;
@@ -331,7 +336,7 @@ function handleButtonClick(id, coords, zoom) {
 // Setup event listeners for buttons
 handleButtonClick('01', [45.519292, 11.338594], 8);
 handleButtonClick('02', [45.4709699, 11.6014322], 15);
-handleButtonClick('03', [45.442492, 11.584501], 15);
+handleButtonClick('03', [46.3928, 15.5744], 6);
 handleButtonClick('04', [46, 12], 9);
 handleButtonClick('05', [41.315, -1.911], 4);
 handleButtonClick('06', [41, -1], 5);
@@ -358,23 +363,70 @@ document.querySelectorAll('.menu a').forEach((menuLink, index) => {
 });
 
 // Visualize cannons
-import { cannons, cannons2 } from './cannons.js';
+import cannons_new from './cannons-new.js';
+// import { cannons, cannons2 } from './cannons.js';
 
-document.getElementById('link-04-1').addEventListener('click', function() {
-    displayCannons(cannons, 'red');
-});
+// document.getElementById('link-04-1').addEventListener('click', function() {
+//     displayCannons(cannons, 'red');
+// });
 
-document.getElementById('link-4-1').addEventListener('click', function() {
-    displayCannons(cannons, 'red');
-});
+// document.getElementById('link-4-1').addEventListener('click', function() {
+//     displayCannons(cannons, 'red');
+// });
 
-document.getElementById('link-4-2').addEventListener('click', function() {
-    displayCannons(cannons2, 'blue');
-});
+// document.getElementById('link-4-2').addEventListener('click', function() {
+//     displayCannons(cannons2, 'blue');
+// });
 
 let circleLayers = [];
+let cannonsList = [];
 let cannonsSet = false;
 let cannonsSet2 = false;
+let cannonsSetNew = false;
+
+//-----------------------------------
+const latitudes = cannonsNew["Latitude"];
+const longitudes = cannonsNew["Longitude"];
+const placeNames = cannonsNew["Place name"];
+    
+function displayCannonsByYear(cannonsNew, year) {
+    cannonsList.forEach(layer => map.removeLayer(layer));
+    cannonsList = [];
+
+    const cannonsForYear = cannonsNew[`Cannons in ${year}`];
+
+    // if (!cannonsForYear) {
+    //     alert(`No data for year ${year}`);
+    //     cannonsSetNew = false;
+    //     return;
+    // }
+
+    Object.keys(cannonsForYear).forEach(idx => {
+        const numCannons = cannonsForYear[idx];
+        if (numCannons !== null && !isNaN(numCannons)) {
+            const lat = latitudes[idx];
+            const lng = parseFloat(longitudes[idx]);
+            const place = placeNames[idx];
+
+            const circle = L.circle([lat, lng], {
+                radius: numCannons * 30,
+                fillColor: '#f03',
+                color: 'red',
+                weight: 2,
+                opacity: 1,
+                fillOpacity: 0.7
+            }).addTo(map);
+
+            circle.bindPopup(`${place}`);
+            cannonsList.push(circle);
+        }
+    });
+
+    cannonsSetNew = true;
+}
+
+displayCannonsByYear(cannons_new, 1900);
+//-----------------------------------
 
 function displayCannons(cannonsData, color) {
     // Remove existing cannon markers
@@ -687,6 +739,45 @@ function updateMap(sectionId) {
         case 'section-1-5':
             flyToAndClear([45.519292, 11.338594], 16);
             break;
+        // case 'section-3-1':
+        //     flyToAndClear([46.3920, 15.5728], 8);
+        //     break;
+        // case 'section-3-2':
+        //     flyToAndClear([45.519292, 11.338594], 10);
+        //     break;
+        // case 'section-3-3':
+        //     flyToAndClear([45.519292, 11.338594], 12);
+        //     break;
+        // case 'section-3-4':
+        //     flyToAndClear([45.519292, 11.338594], 14);
+        //     break;
+        // case 'section-3-5':
+        //     flyToAndClear([45.519292, 11.338594], 16);
+        //     break;
+        // case 'section-3-6':
+        //     flyToAndClear([45.519292, 11.338594], 8);
+        //     break;
+        // case 'section-3-7':
+        //     flyToAndClear([45.519292, 11.338594], 10);
+        //     break;
+        // case 'section-3-8':
+        //     flyToAndClear([45.519292, 11.338594], 12);
+        //     break;
+        // case 'section-3-9':
+        //     flyToAndClear([45.519292, 11.338594], 14);
+        //     break;
+        // case 'section-3-10':
+        //     flyToAndClear([45.519292, 11.338594], 16);
+        //     break;
+        // case 'section-3-11':
+        //     flyToAndClear([45.519292, 11.338594], 8);
+        //     break;
+        // case 'section-3-12':
+        //     flyToAndClear([45.519292, 11.338594], 10);
+        //     break;
+        // case 'section-3-13':
+        //     flyToAndClear([45.519292, 11.338594], 12);
+        //     break;
         default:
             break;
     }
