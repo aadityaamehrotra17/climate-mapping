@@ -268,6 +268,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+let circleLayers = [];
+let cannonsList = [];
+let cannonsSet = false;
+let cannonsSet2 = false;
+let cannonsSetNew = false;
+
 // Function to fly to location and remove layers
 function flyToAndClear(coords, zoom) {
     map.flyTo(coords, zoom);
@@ -363,7 +369,6 @@ document.querySelectorAll('.menu a').forEach((menuLink, index) => {
 });
 
 // Visualize cannons
-import cannons_new from './cannons-new.js';
 // import { cannons, cannons2 } from './cannons.js';
 
 // document.getElementById('link-04-1').addEventListener('click', function() {
@@ -378,54 +383,59 @@ import cannons_new from './cannons-new.js';
 //     displayCannons(cannons2, 'blue');
 // });
 
-let circleLayers = [];
-let cannonsList = [];
-let cannonsSet = false;
-let cannonsSet2 = false;
-let cannonsSetNew = false;
-
 //-----------------------------------
-const latitudes = cannonsNew["Latitude"];
-const longitudes = cannonsNew["Longitude"];
-const placeNames = cannonsNew["Place name"];
-    
-function displayCannonsByYear(cannonsNew, year) {
-    cannonsList.forEach(layer => map.removeLayer(layer));
-    cannonsList = [];
+fetch('cannons-new.json')
+    .then(response => response.json())
+    .then(cannonsNew => {
 
-    const cannonsForYear = cannonsNew[`Cannons in ${year}`];
+        const latitudes = cannonsNew["Latitude"];
+        const longitudes = cannonsNew["Longitude"];
+        const placeNames = cannonsNew["Place name"];
+            
+        function displayCannonsByYear(cannonsNew, year) {
+            cannonsList.forEach(layer => map.removeLayer(layer));
+            cannonsList = [];
 
-    // if (!cannonsForYear) {
-    //     alert(`No data for year ${year}`);
-    //     cannonsSetNew = false;
-    //     return;
-    // }
+            const cannonsForYear = cannonsNew[`Cannons in ${year}`];
 
-    Object.keys(cannonsForYear).forEach(idx => {
-        const numCannons = cannonsForYear[idx];
-        if (numCannons !== null && !isNaN(numCannons)) {
-            const lat = latitudes[idx];
-            const lng = parseFloat(longitudes[idx]);
-            const place = placeNames[idx];
+            // if (!cannonsForYear) {
+            //     alert(`No data for year ${year}`);
+            //     cannonsSetNew = false;
+            //     return;
+            // }
 
-            const circle = L.circle([lat, lng], {
-                radius: numCannons * 30,
-                fillColor: '#f03',
-                color: 'red',
-                weight: 2,
-                opacity: 1,
-                fillOpacity: 0.7
-            }).addTo(map);
+            Object.keys(cannonsForYear).forEach(idx => {
+                const numCannons = cannonsForYear[idx];
+                if (numCannons !== null && !isNaN(numCannons)) {
+                    const lat = latitudes[idx];
+                    const lng = parseFloat(longitudes[idx]);
+                    const place = placeNames[idx];
+                    
+                    if (lat !== null && lng !== null && !isNaN(lat) && !isNaN(lng)) {
+                        const circle = L.circle([lat, lng], {
+                            radius: numCannons * 30,
+                            fillColor: '#f03',
+                            color: 'red',
+                            weight: 2,
+                            opacity: 1,
+                            fillOpacity: 0.7
+                        }).addTo(map);
 
-            circle.bindPopup(`${place}`);
-            cannonsList.push(circle);
+                        circle.bindPopup(`${place}`);
+                        cannonsList.push(circle);
+                    }
+                }
+            });
+
+            cannonsSetNew = true;
         }
+
+        document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-1') {
+                displayCannonsByYear(cannonsNew, 1900);
+            }
+        });
     });
-
-    cannonsSetNew = true;
-}
-
-displayCannonsByYear(cannons_new, 1900);
 //-----------------------------------
 
 function displayCannons(cannonsData, color) {
@@ -498,83 +508,83 @@ function displayVideo(index) {
     videoExists = true;
 }
 
-document.getElementById('link-05-1').addEventListener('click', function() {
-    displayVideo(0); // Display Storm 1 with first set of coordinates
-});
+// document.getElementById('link-05-1').addEventListener('click', function() {
+//     displayVideo(0); // Display Storm 1 with first set of coordinates
+// });
 
-document.getElementById('link-05-2').addEventListener('click', function() {
-    displayVideo(1); // Display Storm 2 with second set of coordinates
-});
+// document.getElementById('link-05-2').addEventListener('click', function() {
+//     displayVideo(1); // Display Storm 2 with second set of coordinates
+// });
 
-document.getElementById('link-05-3').addEventListener('click', function() {
-    displayVideo(2); // Display Storm 3 with third set of coordinates
-});
+// document.getElementById('link-05-3').addEventListener('click', function() {
+//     displayVideo(2); // Display Storm 3 with third set of coordinates
+// });
 
 // Spotlight effect
-document.getElementById('06').addEventListener('click', function() {
-    if (!spotlightExists) {
-        map.createPane('maskPane');
-        map.getPane('maskPane').style.zIndex = 450;
-        maskLayer = L.rectangle([[-120, -240], [120, 240]], {
-            color: "transparent",
-            weight: 1,
-            fillColor: "#000",
-            fillOpacity: 0.3,
-            interactive: false,
-            pane: 'maskPane'
-        }).addTo(map);
-        map.createPane('spotlightPane');
-        map.getPane('spotlightPane').style.zIndex = 460;
-        spotlight = L.circle([41, -1], {
-            radius: 1000000,
-            color: "transparent",
-            fillColor: "#fff",
-            fillOpacity: 0.2,
-            interactive: false,
-            pane: 'spotlightPane'
-        }).addTo(map);
-        spotlight.bringToFront();
-        spotlightExists = true;
-    }
-});
+// document.getElementById('06').addEventListener('click', function() {
+//     if (!spotlightExists) {
+//         map.createPane('maskPane');
+//         map.getPane('maskPane').style.zIndex = 450;
+//         maskLayer = L.rectangle([[-120, -240], [120, 240]], {
+//             color: "transparent",
+//             weight: 1,
+//             fillColor: "#000",
+//             fillOpacity: 0.3,
+//             interactive: false,
+//             pane: 'maskPane'
+//         }).addTo(map);
+//         map.createPane('spotlightPane');
+//         map.getPane('spotlightPane').style.zIndex = 460;
+//         spotlight = L.circle([41, -1], {
+//             radius: 1000000,
+//             color: "transparent",
+//             fillColor: "#fff",
+//             fillOpacity: 0.2,
+//             interactive: false,
+//             pane: 'spotlightPane'
+//         }).addTo(map);
+//         spotlight.bringToFront();
+//         spotlightExists = true;
+//     }
+// });
 
 // Torch feature
-function torchToggle() {
-    var torch = document.getElementById('torch');
-    var mapContainer = document.getElementById('map'); // Assuming your map container has the ID 'map'
+// function torchToggle() {
+//     var torch = document.getElementById('torch');
+//     var mapContainer = document.getElementById('map'); // Assuming your map container has the ID 'map'
     
-    if (!torchOn) {
-        torch.style.zIndex = '10000';
-        torch.style.opacity = '1';
-        torchOn = true;
-        // Torch movement handler with bounding logic
-        map.on('mousemove', function(e) {
-            const point = map.latLngToContainerPoint(e.latlng);
-            const torchWidth = torch.offsetWidth;
-            const torchHeight = torch.offsetHeight;
-            const mapRect = mapContainer.getBoundingClientRect();
+//     if (!torchOn) {
+//         torch.style.zIndex = '10000';
+//         torch.style.opacity = '1';
+//         torchOn = true;
+//         // Torch movement handler with bounding logic
+//         map.on('mousemove', function(e) {
+//             const point = map.latLngToContainerPoint(e.latlng);
+//             const torchWidth = torch.offsetWidth;
+//             const torchHeight = torch.offsetHeight;
+//             const mapRect = mapContainer.getBoundingClientRect();
 
-            const newLeft = Math.min(Math.max(0, point.x - torchWidth / 2), mapRect.width - torchWidth);
-            const newTop = Math.min(Math.max(0, point.y - torchHeight / 2), mapRect.height - torchHeight);
+//             const newLeft = Math.min(Math.max(0, point.x - torchWidth / 2), mapRect.width - torchWidth);
+//             const newTop = Math.min(Math.max(0, point.y - torchHeight / 2), mapRect.height - torchHeight);
 
-            torch.style.left = `${newLeft}px`;
-            torch.style.top = `${newTop}px`;
-        });
+//             torch.style.left = `${newLeft}px`;
+//             torch.style.top = `${newTop}px`;
+//         });
 
-    } else {
-        torch.style.zIndex = '-10000';
-        torch.style.opacity = '0';
-        torchOn = false;
-    }
-}
+//     } else {
+//         torch.style.zIndex = '-10000';
+//         torch.style.opacity = '0';
+//         torchOn = false;
+//     }
+// }
 
-document.addEventListener('DOMContentLoaded', function() {
-    document.addEventListener('keydown', function(event) {
-        if (event.keyCode === 84) {
-            torchToggle();
-        }
-    });
-});
+// document.addEventListener('DOMContentLoaded', function() {
+//     document.addEventListener('keydown', function(event) {
+//         if (event.keyCode === 84) {
+//             torchToggle();
+//         }
+//     });
+// });
 
 document.addEventListener("DOMContentLoaded", function() {
     const textContainer = document.querySelector('.text-container');
