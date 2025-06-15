@@ -413,15 +413,19 @@ fetch('cannons-new.json')
                     
                     if (lat !== null && lng !== null && !isNaN(lat) && !isNaN(lng)) {
                         const circle = L.circle([lat, lng], {
-                            radius: numCannons * 30,
+                            radius: numCannons * 60,
                             fillColor: '#f03',
                             color: 'red',
                             weight: 2,
                             opacity: 1,
                             fillOpacity: 0.7
                         }).addTo(map);
-
-                        circle.bindPopup(`${place}`);
+                        
+                        if (numCannons == 1) {
+                            circle.bindPopup(`${place} had ${numCannons} cannon in ${year}`);
+                        } else {
+                            circle.bindPopup(`${place} had ${numCannons} cannons in ${year}`);
+                        }
                         cannonsList.push(circle);
                     }
                 }
@@ -431,8 +435,41 @@ fetch('cannons-new.json')
         }
 
         document.getElementById('text').addEventListener('click', function(event) {
-            if (event.target.id === 'link-3-1') {
+            if (event.target.id === 'link-3-2') {
+                flyToAndClear([45.4384, 10.9917], 7);
+                displayCannonsByYear(cannonsNew, 1899);
+            }
+        });
+        document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-2-1') {
+                map.flyTo([45.5218, 11.3355], 10);
+            }
+        });
+        document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-2-2') {
+                map.flyTo([45.1291, 8.4507], 11);
+            }
+        });
+        document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-3') {
+                flyToAndClear([44.7700, 11.2577], 6.5);
                 displayCannonsByYear(cannonsNew, 1900);
+            }
+        });
+        document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-4') {
+                flyToAndClear([43.655, 16.595], 6);
+                displayCannonsByYear(cannonsNew, 1900);
+            }
+        });
+        document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-4-1') {
+                map.flyTo([46.5928, 15.5744], 11);
+            }
+        });
+        document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-4-2') {
+                map.flyTo([48.55, 16.08333], 11);
             }
         });
     });

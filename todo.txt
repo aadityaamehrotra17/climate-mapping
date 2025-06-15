@@ -8,4 +8,4 @@ site design: basemap button colour, menu narrow, nav buttons closer, fonts, colo
 optimise code
 add comments
 
-menu nav bug
+menu nav bug!
