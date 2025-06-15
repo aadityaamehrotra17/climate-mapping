@@ -472,6 +472,82 @@ fetch('cannons-new.json')
                 map.flyTo([48.55, 16.08333], 11);
             }
         });
+        document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-5') {
+                flyToAndClear([46.0050, 4.6474], 6);
+                displayCannonsByYear(cannonsNew, 1900);
+            }
+        });
+        document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-6') {
+                flyToAndClear([45.4384, 10.9917], 6.5);
+                displayCannonsByYear(cannonsNew, 1900);
+            }
+        });
+        document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-6-1') {
+                map.flyTo([45.4105, 11.8782], 10);
+            }
+        });
+        document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-7') {
+                flyToAndClear([40.4167, -3.7033], 7);
+                displayCannonsByYear(cannonsNew, 1901); // only other data is 1904?
+            }
+        });
+        document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-8') {
+                flyToAndClear([43.3453, 40.4997], 7);
+                displayCannonsByYear(cannonsNew, 1901);
+            }
+        });
+        document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-8-1') {
+                map.flyTo([42.0427, 45.5063], 13);
+            }
+        });
+        document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-8-2') {
+                map.flyTo([45.0578, 34.6051], 13);
+            }
+        });
+        document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-9') {
+                flyToAndClear([45.4384, 10.9917], 5);
+                displayCannonsByYear(cannonsNew, 1901);
+            }
+        });
+        document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-9-1') {
+                map.flyTo([45.7640, 4.8357], 10);
+            }
+        });
+        document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-9-2') {
+                map.flyTo([45.1291, 8.4507], 10.5);
+            }
+        });
+        document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-9-3') {
+                map.flyTo([44.6444, 7.4927], 12);
+            }
+        });
+        document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-10') {
+                flyToAndClear([46.655, 15.595], 10);
+                displayCannonsByYear(cannonsNew, 1902);
+            }
+        });
+        document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-10-1') {
+                map.flyTo([47.0679, 15.4417], 11);
+            }
+        });
+        document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-10-2') {
+                map.flyTo([46.3928, 15.5744], 11);
+            }
+        });
     });
 //-----------------------------------
 
