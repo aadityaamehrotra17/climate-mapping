@@ -548,6 +548,24 @@ fetch('cannons-new.json')
                 map.flyTo([46.3928, 15.5744], 11);
             }
         });
+        document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-11') {
+                flyToAndClear([45.4384, 11.9917], 9);
+                displayCannonsByYear(cannonsNew, 1903);
+            }
+        });
+        document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-11-1') {
+                flyToAndClear([45.4384, 11.9917], 9);
+                displayCannonsByYear(cannonsNew, 1904);
+            }
+        });
+        document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-12') {
+                flyToAndClear([45.4384, 12.9917], 5);
+                displayCannonsByYear(cannonsNew, 1904);
+            }
+        });
     });
 //-----------------------------------
 
