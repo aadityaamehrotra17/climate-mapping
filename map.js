@@ -413,7 +413,7 @@ fetch('cannons-new.json')
                     
                     if (lat !== null && lng !== null && !isNaN(lat) && !isNaN(lng)) {
                         const circle = L.circle([lat, lng], {
-                            radius: numCannons * 60,
+                            radius: numCannons * 60, // radius here
                             fillColor: '#f03',
                             color: 'red',
                             weight: 2,
@@ -433,10 +433,10 @@ fetch('cannons-new.json')
 
             cannonsSetNew = true;
         }
-
+// Luca
         document.getElementById('text').addEventListener('click', function(event) {
             if (event.target.id === 'link-3-2') {
-                flyToAndClear([45.4384, 10.9917], 7);
+                flyToAndClear([45.4384, 10.9917], 7.5);
                 displayCannonsByYear(cannonsNew, 1899);
             }
         });
