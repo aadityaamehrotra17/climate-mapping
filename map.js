@@ -452,7 +452,7 @@ fetch('cannons-new.json')
         });
         document.getElementById('text').addEventListener('click', function(event) {
             if (event.target.id === 'link-3-3') {
-                flyToAndClear([44.7700, 11.2577], 6.5);
+                flyToAndClear([44.7700, 11.2577], 6);
                 displayCannonsByYear(cannonsNew, 1900);
             }
         });
