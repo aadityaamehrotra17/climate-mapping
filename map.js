@@ -433,7 +433,8 @@ fetch('cannons-new.json')
 
             cannonsSetNew = true;
         }
-// Luca
+// Luca test comment
+
         document.getElementById('text').addEventListener('click', function(event) {
             if (event.target.id === 'link-3-2') {
                 flyToAndClear([45.4384, 10.9917], 7.5);
@@ -585,6 +586,7 @@ function displayCannons(cannonsData, color) {
     cannonsSet = (color === 'red');
     cannonsSet2 = (color === 'blue');
 }
+
 
 
 function createCircleMarker(feature, latlng, color) {
