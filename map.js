@@ -270,9 +270,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 let circleLayers = [];
 let cannonsList = [];
+let missingCannonsList = [];
 let cannonsSet = false;
 let cannonsSet2 = false;
 let cannonsSetNew = false;
+let cannonsSetMissing = false;
 
 // Function to fly to location and remove layers
 function flyToAndClear(coords, zoom) {
@@ -295,6 +297,11 @@ function flyToAndClear(coords, zoom) {
         cannonsList.forEach(layer => map.removeLayer(layer));
         cannonsList = [];
         cannonsSetNew = false;
+    }
+    if (cannonsSetMissing) {
+        missingCannonsList.forEach(layer => map.removeLayer(layer));
+        missingCannonsList = [];
+        cannonsSetMissing = false;
     }
     if (videoExists) {
         map.removeLayer(videoOverlay);
@@ -383,7 +390,7 @@ document.querySelectorAll('.menu a').forEach((menuLink, index) => {
 //     displayCannons(cannons2, 'blue');
 // });
 
-//-----------------------------------
+//----------------------------------- RED CANNONS
 fetch('cannons-new.json')
     .then(response => response.json())
     .then(cannonsNew => {
@@ -565,6 +572,114 @@ fetch('cannons-new.json')
             if (event.target.id === 'link-3-12') {
                 flyToAndClear([45.4384, 12.9917], 5);
                 displayCannonsByYear(cannonsNew, 1904);
+            }
+        });
+    });
+//-----------------------------------
+//----------------------------------- GREY CANNONS
+fetch('cannons-adjusted.json')
+    .then(response => response.json())
+    .then(cannonsAdjusted => {
+        function displayMissingCannonsByYear(cannonsAdjusted, year) {
+            missingCannonsList.forEach(layer => map.removeLayer(layer));
+            missingCannonsList = [];
+
+            Object.values(cannonsAdjusted).forEach(entry => {
+                const yearsArr = entry["Years"] ? entry["Years"].split(',').map(y => y.trim()) : [];
+                const hasYear = yearsArr.includes(String(year));
+
+                const cannonsField = `Cannons in ${year}`;
+                const cannonsValue = entry.hasOwnProperty(cannonsField) ? entry[cannonsField] : undefined;
+                const isMissingOrNull = cannonsValue === undefined || cannonsValue === null;
+
+                if (hasYear && isMissingOrNull) {
+                    const lat = parseFloat(entry["Latitude"]);
+                    const lng = parseFloat(entry["Longitude"]);
+                    const place = entry["Place name"] || "Unknown location";
+
+                    if (lat !== null && lng !== null && !isNaN(lat) && !isNaN(lng)) {
+                        const circle = L.circle([lat, lng], {
+                            radius: 50 * 60,
+                            fillColor: 'lightgrey',
+                            color: 'black',
+                            weight: 2,
+                            opacity: 1,
+                            fillOpacity: 0.5
+                        }).addTo(map);
+
+                        circle.bindPopup(`${place} had cannons in ${year}`);
+                        missingCannonsList.push(circle);
+                    }
+                }
+            });
+            cannonsSetMissing = true;
+        }
+
+        document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-1') {
+                flyToAndClear([46.3928, 15.5744], 9);
+                displayMissingCannonsByYear(cannonsAdjusted, 1896);
+            }
+        });
+        document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-2') {
+                displayMissingCannonsByYear(cannonsAdjusted, 1899);
+            }
+        });
+        document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-3') {
+                displayMissingCannonsByYear(cannonsAdjusted, 1900);
+            }
+        });
+        document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-4') {
+                displayMissingCannonsByYear(cannonsAdjusted, 1900);
+            }
+        });
+        document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-5') {
+                displayMissingCannonsByYear(cannonsAdjusted, 1900);
+            }
+        });
+        document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-6') {
+                displayMissingCannonsByYear(cannonsAdjusted, 1900);
+            }
+        });
+        document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-7') {
+                displayMissingCannonsByYear(cannonsAdjusted, 1901); // only other data is 1904?
+            }
+        });
+        document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-8') {
+                displayMissingCannonsByYear(cannonsAdjusted, 1901);
+            }
+        });
+        document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-9') {
+                displayMissingCannonsByYear(cannonsAdjusted, 1901);
+            }
+        });
+        document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-10') {
+                displayMissingCannonsByYear(cannonsAdjusted, 1902);
+            }
+        });
+        document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-11-1') {
+                displayMissingCannonsByYear(cannonsAdjusted, 1904);
+            }
+        });
+        document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-12') {
+                displayMissingCannonsByYear(cannonsAdjusted, 1904);
+            }
+        });
+        document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-13') {
+                flyToAndClear([46.2276, 2.2137], 7)
+                displayMissingCannonsByYear(cannonsAdjusted, 1912);
             }
         });
     });
