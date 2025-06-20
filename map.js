@@ -585,8 +585,11 @@ fetch('cannons-adjusted.json')
             missingCannonsList = [];
 
             Object.values(cannonsAdjusted).forEach(entry => {
-                const yearsArr = entry["Years"] ? entry["Years"].split(',').map(y => y.trim()) : [];
-                const hasYear = yearsArr.includes(String(year));
+                const yearsArr = [];
+                for (let i = parseFloat(entry["Earliest Year"]); i <= parseFloat(entry["Latest Year"]); i++) {
+                    yearsArr.push(i);
+                }
+                const hasYear = yearsArr.includes(year);
 
                 const cannonsField = `Cannons in ${year}`;
                 const cannonsValue = entry.hasOwnProperty(cannonsField) ? entry[cannonsField] : undefined;
@@ -664,6 +667,11 @@ fetch('cannons-adjusted.json')
         document.getElementById('text').addEventListener('click', function(event) {
             if (event.target.id === 'link-3-10') {
                 displayMissingCannonsByYear(cannonsAdjusted, 1902);
+            }
+        });
+        document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-11') {
+                displayMissingCannonsByYear(cannonsAdjusted, 1903);
             }
         });
         document.getElementById('text').addEventListener('click', function(event) {
