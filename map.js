@@ -338,7 +338,7 @@ document.getElementById('text').addEventListener('click', function(event) {
     }
 });
 
-// Generic function to handle simple button clicks
+// Generic function to handle simple button click
 function handleButtonClick(id, coords, zoom) {
     document.getElementById(id).addEventListener('click', function() {
         flyToAndClear(coords, zoom);
