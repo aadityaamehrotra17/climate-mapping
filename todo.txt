@@ -1,11 +1,12 @@
-storm colour - luca
 section scrolling bug
 mobile responsiveness: modal (heading only)
-home modal content - luca
-conclusion content - luca
-site design: basemap button colour, menu narrow, nav buttons closer, fonts, colors, favicon - luca
-
+home modal esc
+ideal basemap
 optimise code
-add comments
-
-menu nav bug!
+menu nav bug
+opening Arzignano bug
+When page reloads and I click on 3, I sometimes get 2
+scrolling up from 3 goes to start of 2
+torch/alternatives
+If I go from 3-1 to 3-2-2, it still shows the cannons for the old year
+Add year onto map
