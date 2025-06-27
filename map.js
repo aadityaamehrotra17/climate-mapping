@@ -440,11 +440,11 @@ fetch('cannons-new.json')
 
             cannonsSetNew = true;
         }
-// Luca test comment
+    
 
         document.getElementById('text').addEventListener('click', function(event) {
             if (event.target.id === 'link-3-2') {
-                flyToAndClear([45.4384, 10.9917], 7.5);
+                flyToAndClear([45.4384, 10.9917], 7.3);
                 displayCannonsByYear(cannonsNew, 1899);
             }
         });
@@ -460,13 +460,13 @@ fetch('cannons-new.json')
         });
         document.getElementById('text').addEventListener('click', function(event) {
             if (event.target.id === 'link-3-3') {
-                flyToAndClear([44.7700, 11.2577], 6);
+                flyToAndClear([42.35, 13.4], 6);
                 displayCannonsByYear(cannonsNew, 1900);
             }
         });
         document.getElementById('text').addEventListener('click', function(event) {
             if (event.target.id === 'link-3-4') {
-                flyToAndClear([43.655, 16.595], 6);
+                flyToAndClear([46.051389, 14.506111], 6);
                 displayCannonsByYear(cannonsNew, 1900);
             }
         });
@@ -482,7 +482,7 @@ fetch('cannons-new.json')
         });
         document.getElementById('text').addEventListener('click', function(event) {
             if (event.target.id === 'link-3-5') {
-                flyToAndClear([46.0050, 4.6474], 6);
+                flyToAndClear([46.9933, 3.1572], 6.25);
                 displayCannonsByYear(cannonsNew, 1900);
             }
         });
@@ -499,13 +499,13 @@ fetch('cannons-new.json')
         });
         document.getElementById('text').addEventListener('click', function(event) {
             if (event.target.id === 'link-3-7') {
-                flyToAndClear([40.4167, -3.7033], 7);
+                flyToAndClear([40.826111, -3.538889], 6.3);
                 displayCannonsByYear(cannonsNew, 1901); // only other data is 1904?
             }
         });
         document.getElementById('text').addEventListener('click', function(event) {
             if (event.target.id === 'link-3-8') {
-                flyToAndClear([43.3453, 40.4997], 7);
+                flyToAndClear([45, 41.116667], 6);
                 displayCannonsByYear(cannonsNew, 1901);
             }
         });
@@ -542,7 +542,7 @@ fetch('cannons-new.json')
         });
         document.getElementById('text').addEventListener('click', function(event) {
             if (event.target.id === 'link-3-10') {
-                flyToAndClear([46.655, 15.595], 10);
+                flyToAndClear([47.130833, 11.453056], 6);
                 displayCannonsByYear(cannonsNew, 1902);
             }
         });
@@ -558,13 +558,13 @@ fetch('cannons-new.json')
         });
         document.getElementById('text').addEventListener('click', function(event) {
             if (event.target.id === 'link-3-11') {
-                flyToAndClear([45.4384, 11.9917], 9);
+                flyToAndClear([45.116667, 10.533333], 7.25);
                 displayCannonsByYear(cannonsNew, 1903);
             }
         });
         document.getElementById('text').addEventListener('click', function(event) {
             if (event.target.id === 'link-3-11-1') {
-                flyToAndClear([45.4384, 11.9917], 9);
+                flyToAndClear([45.116667, 10.533333], 7.25);
                 displayCannonsByYear(cannonsNew, 1904);
             }
         });
@@ -620,7 +620,7 @@ fetch('cannons-adjusted.json')
 
         document.getElementById('text').addEventListener('click', function(event) {
             if (event.target.id === 'link-3-1') {
-                flyToAndClear([46.3928, 15.5744], 9);
+                flyToAndClear([46.3928, 15.5744], 5);
                 displayMissingCannonsByYear(cannonsAdjusted, 1896);
             }
         });
@@ -686,7 +686,7 @@ fetch('cannons-adjusted.json')
         });
         document.getElementById('text').addEventListener('click', function(event) {
             if (event.target.id === 'link-3-13') {
-                flyToAndClear([46.2276, 2.2137], 7)
+                flyToAndClear([46.2276, 2.2137], 6.25)
                 displayMissingCannonsByYear(cannonsAdjusted, 1912);
             }
         });
