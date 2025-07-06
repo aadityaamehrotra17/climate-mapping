@@ -450,12 +450,14 @@ fetch('cannons-new.json')
         });
         document.getElementById('text').addEventListener('click', function(event) {
             if (event.target.id === 'link-3-2-1') {
-                map.flyTo([45.5218, 11.3355], 10);
+                flyToAndClear([45.5218, 11.3355], 10);
+                displayCannonsByYear(cannonsNew, 1899);
             }
         });
         document.getElementById('text').addEventListener('click', function(event) {
             if (event.target.id === 'link-3-2-2') {
-                map.flyTo([45.1291, 8.4507], 11);
+                flyToAndClear([45.1291, 8.4507], 11);
+                displayCannonsByYear(cannonsNew, 1899);
             }
         });
         document.getElementById('text').addEventListener('click', function(event) {
@@ -472,12 +474,14 @@ fetch('cannons-new.json')
         });
         document.getElementById('text').addEventListener('click', function(event) {
             if (event.target.id === 'link-3-4-1') {
-                map.flyTo([46.5928, 15.5744], 11);
+                flyToAndClear([46.5928, 15.5744], 11);
+                displayCannonsByYear(cannonsNew, 1900);
             }
         });
         document.getElementById('text').addEventListener('click', function(event) {
             if (event.target.id === 'link-3-4-2') {
-                map.flyTo([48.55, 16.08333], 11);
+                flyToAndClear([48.55, 16.08333], 11);
+                displayCannonsByYear(cannonsNew, 1900);
             }
         });
         document.getElementById('text').addEventListener('click', function(event) {
@@ -494,7 +498,8 @@ fetch('cannons-new.json')
         });
         document.getElementById('text').addEventListener('click', function(event) {
             if (event.target.id === 'link-3-6-1') {
-                map.flyTo([45.4105, 11.8782], 10);
+                flyToAndClear([45.4105, 11.8782], 10);
+                displayCannonsByYear(cannonsNew, 1900);
             }
         });
         document.getElementById('text').addEventListener('click', function(event) {
@@ -511,12 +516,14 @@ fetch('cannons-new.json')
         });
         document.getElementById('text').addEventListener('click', function(event) {
             if (event.target.id === 'link-3-8-1') {
-                map.flyTo([42.0427, 45.5063], 13);
+                flyToAndClear([42.0427, 45.5063], 13);
+                displayCannonsByYear(cannonsNew, 1901);
             }
         });
         document.getElementById('text').addEventListener('click', function(event) {
             if (event.target.id === 'link-3-8-2') {
-                map.flyTo([45.0578, 34.6051], 13);
+                flyToAndClear([45.0578, 34.6051], 13);
+                displayCannonsByYear(cannonsNew, 1901);
             }
         });
         document.getElementById('text').addEventListener('click', function(event) {
@@ -527,17 +534,20 @@ fetch('cannons-new.json')
         });
         document.getElementById('text').addEventListener('click', function(event) {
             if (event.target.id === 'link-3-9-1') {
-                map.flyTo([45.7640, 4.8357], 10);
+                flyToAndClear([45.7640, 4.8357], 10);
+                displayCannonsByYear(cannonsNew, 1901);
             }
         });
         document.getElementById('text').addEventListener('click', function(event) {
             if (event.target.id === 'link-3-9-2') {
-                map.flyTo([45.1291, 8.4507], 10.5);
+                flyToAndClear([45.1291, 8.4507], 10.5);
+                displayCannonsByYear(cannonsNew, 1901);
             }
         });
         document.getElementById('text').addEventListener('click', function(event) {
             if (event.target.id === 'link-3-9-3') {
-                map.flyTo([44.6444, 7.4927], 12);
+                flyToAndClear([44.6444, 7.4927], 12);
+                displayCannonsByYear(cannonsNew, 1901);
             }
         });
         document.getElementById('text').addEventListener('click', function(event) {
@@ -548,12 +558,14 @@ fetch('cannons-new.json')
         });
         document.getElementById('text').addEventListener('click', function(event) {
             if (event.target.id === 'link-3-10-1') {
-                map.flyTo([47.0679, 15.4417], 11);
+                flyToAndClear([47.0679, 15.4417], 11);
+                displayCannonsByYear(cannonsNew, 1902);
             }
         });
         document.getElementById('text').addEventListener('click', function(event) {
             if (event.target.id === 'link-3-10-2') {
-                map.flyTo([46.3928, 15.5744], 11);
+                flyToAndClear([46.3928, 15.5744], 11);
+                displayCannonsByYear(cannonsNew, 1902);
             }
         });
         document.getElementById('text').addEventListener('click', function(event) {
@@ -630,12 +642,32 @@ fetch('cannons-adjusted.json')
             }
         });
         document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-2-1') {
+                displayMissingCannonsByYear(cannonsAdjusted, 1899);
+            }
+        });
+        document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-2-2') {
+                displayMissingCannonsByYear(cannonsAdjusted, 1899);
+            }
+        });
+        document.getElementById('text').addEventListener('click', function(event) {
             if (event.target.id === 'link-3-3') {
                 displayMissingCannonsByYear(cannonsAdjusted, 1900);
             }
         });
         document.getElementById('text').addEventListener('click', function(event) {
             if (event.target.id === 'link-3-4') {
+                displayMissingCannonsByYear(cannonsAdjusted, 1900);
+            }
+        });
+        document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-4-1') {
+                displayMissingCannonsByYear(cannonsAdjusted, 1900);
+            }
+        });
+        document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-4-2') {
                 displayMissingCannonsByYear(cannonsAdjusted, 1900);
             }
         });
@@ -650,6 +682,11 @@ fetch('cannons-adjusted.json')
             }
         });
         document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-6-1') {
+                displayMissingCannonsByYear(cannonsAdjusted, 1900);
+            }
+        });
+        document.getElementById('text').addEventListener('click', function(event) {
             if (event.target.id === 'link-3-7') {
                 displayMissingCannonsByYear(cannonsAdjusted, 1901); // only other data is 1904?
             }
@@ -660,12 +697,47 @@ fetch('cannons-adjusted.json')
             }
         });
         document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-8-1') {
+                displayMissingCannonsByYear(cannonsAdjusted, 1901);
+            }
+        });
+        document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-8-2') {
+                displayMissingCannonsByYear(cannonsAdjusted, 1901);
+            }
+        });
+        document.getElementById('text').addEventListener('click', function(event) {
             if (event.target.id === 'link-3-9') {
                 displayMissingCannonsByYear(cannonsAdjusted, 1901);
             }
         });
         document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-9-1') {
+                displayMissingCannonsByYear(cannonsAdjusted, 1901);
+            }
+        });
+        document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-9-2') {
+                displayMissingCannonsByYear(cannonsAdjusted, 1901);
+            }
+        });
+        document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-9-3') {
+                displayMissingCannonsByYear(cannonsAdjusted, 1901);
+            }
+        });
+        document.getElementById('text').addEventListener('click', function(event) {
             if (event.target.id === 'link-3-10') {
+                displayMissingCannonsByYear(cannonsAdjusted, 1902);
+            }
+        });
+        document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-10-1') {
+                displayMissingCannonsByYear(cannonsAdjusted, 1902);
+            }
+        });
+        document.getElementById('text').addEventListener('click', function(event) {
+            if (event.target.id === 'link-3-10-2') {
                 displayMissingCannonsByYear(cannonsAdjusted, 1902);
             }
         });

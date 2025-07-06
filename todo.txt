@@ -8,5 +8,4 @@ opening Arzignano bug
 When page reloads and I click on 3, I sometimes get 2
 scrolling up from 3 goes to start of 2
 torch/alternatives
-If I go from 3-1 to 3-2-2, it still shows the cannons for the old year
 Add year onto map
