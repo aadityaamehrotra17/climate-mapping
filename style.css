@@ -210,6 +210,16 @@ button:disabled, button:disabled:hover {
     border: lightgray 2px groove;
 }
 
+#yearlabel {
+    font-size: 16px;
+    font-weight: 600;
+    background: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.3);
+    display: none;
+}
+
 #qButton:hover {
     cursor: pointer;
     background-color: darkgray;

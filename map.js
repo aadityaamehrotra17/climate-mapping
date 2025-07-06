@@ -65,6 +65,7 @@ L.control.rainviewer({
     animationInterval: 500,
     opacity: 0.7
 }).addTo(map);
+
 var toggleButton = L.control({position: 'bottomleft'});
 toggleButton.onAdd = function (map) {
     var div = L.DomUtil.create('div', 'toggle-button');
@@ -72,6 +73,7 @@ toggleButton.onAdd = function (map) {
     return div;
 };
 toggleButton.addTo(map);
+
 var qButton = L.control({position: 'bottomright'});
 qButton.onAdd = function (map) {
     var div = L.DomUtil.create('div', 'q-button');
@@ -79,6 +81,29 @@ qButton.onAdd = function (map) {
     return div;
 };
 qButton.addTo(map);
+
+// Cannons Label
+var labelControl = L.control({ position: 'topleft' });
+labelControl.onAdd = function(map) {
+    var div = L.DomUtil.create('div');
+    div.id = 'yearlabel';
+    div.innerHTML = '';
+    return div;
+};
+labelControl.addTo(map);
+
+function showYearLabel(year) {
+    const label = document.getElementById('yearlabel');
+    if (label) {
+        label.innerHTML = ''; // Clear previous text
+        if (year && year.trim() !== '') {
+            label.innerHTML = `Year: ${year.trim()}`;
+            label.style.display = 'block';
+        } else {
+            label.style.display = 'none';
+        }
+    }
+}
 
 // james code
 var mostRecentTime;
@@ -279,6 +304,7 @@ let cannonsSetMissing = false;
 // Function to fly to location and remove layers
 function flyToAndClear(coords, zoom) {
     map.flyTo(coords, zoom);
+    showYearLabel('');
     if (circleExists) {
         map.removeLayer(circle);
         circleExists = false;
@@ -628,6 +654,7 @@ fetch('cannons-adjusted.json')
                 }
             });
             cannonsSetMissing = true;
+            showYearLabel(`${year}`);
         }
 
         document.getElementById('text').addEventListener('click', function(event) {

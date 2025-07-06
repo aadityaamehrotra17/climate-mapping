@@ -8,4 +8,3 @@ opening Arzignano bug
 When page reloads and I click on 3, I sometimes get 2
 scrolling up from 3 goes to start of 2
 torch/alternatives
-Add year onto map
