@@ -455,9 +455,9 @@ fetch('cannons-new.json')
                         }).addTo(map);
                         
                         if (numCannons == 1) {
-                            circle.bindPopup(`${place} had ${numCannons} cannon in ${year}`);
+                            circle.bindPopup(`${place}: ${numCannons} cannon in ${year}`);
                         } else {
-                            circle.bindPopup(`${place} had ${numCannons} cannons in ${year}`);
+                            circle.bindPopup(`${place}: ${numCannons} cannons in ${year}`);
                         }
                         cannonsList.push(circle);
                     }
@@ -648,7 +648,7 @@ fetch('cannons-adjusted.json')
                             fillOpacity: 0.5
                         }).addTo(map);
 
-                        circle.bindPopup(`${place} had cannons in ${year}`);
+                        circle.bindPopup(`${place}: cannons present in ${year}, number unknown.`);
                         missingCannonsList.push(circle);
                     }
                 }

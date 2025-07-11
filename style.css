@@ -3,7 +3,7 @@ html, body {
     padding: 0;
     height: 100vh;
     width: 100vw;
-    background-color: #E7F0DC;
+    background-color: #FAF6E9;
 }
 
 * {
@@ -13,17 +13,17 @@ html, body {
 .navbar {
     height: 10%;
     width: 100%;
-    background-color: #B6C7AA;
+    background-color: #D9DFC6;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 3rem;
-    color: #1A3636;
+    color: #FFFDF6;
 }
 
 .menu {
     display: flex;
-    background-color: #ACD793;
+    background-color: #EFF3EA;
     justify-content: space-evenly;
     align-items: center;
     margin: auto;
@@ -81,7 +81,7 @@ a {
 .text-column {
     height: 100%;
     width: 35%;
-    background-color: rgb(215, 227, 216);
+    background-color: EFF3EA;
     min-width: 400px;
 }
 
