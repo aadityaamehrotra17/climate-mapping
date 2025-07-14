@@ -875,7 +875,7 @@ function displayVideo(index) {
 //     displayVideo(2); // Display Storm 3 with third set of coordinates
 // });
 
-// Spotlight effect
+//Spotlight effect
 // document.getElementById('06').addEventListener('click', function() {
 //     if (!spotlightExists) {
 //         map.createPane('maskPane');
@@ -902,6 +902,36 @@ function displayVideo(index) {
 //         spotlightExists = true;
 //     }
 // });
+
+function showTorchAtLatLng(lat, lng) {
+    var torch = document.getElementById('torch');
+    var mapContainer = document.getElementById('map');
+    if (!torch) return;
+
+    // Convert lat/lng to container point (pixel coordinates)
+    const point = map.latLngToContainerPoint([lat, lng]);
+    const torchWidth = torch.offsetWidth;
+    const torchHeight = torch.offsetHeight;
+    const mapRect = mapContainer.getBoundingClientRect();
+
+    // Center the torch at the point
+    const newLeft = Math.min(Math.max(0, point.x - torchWidth / 2), mapRect.width - torchWidth);
+    const newTop = Math.min(Math.max(0, point.y - torchHeight / 2), mapRect.height - torchHeight);
+
+    torch.style.left = `${newLeft}px`;
+    torch.style.top = `${newTop}px`;
+    torch.style.zIndex = '10000';
+    torch.style.opacity = '1';
+    torchOn = true;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('keydown', function(event) {
+        if (event.keyCode === 84) {
+            showTorchAtLatLng(28.7041, 77.1025);
+        }
+    });
+});
 
 // Torch feature
 // function torchToggle() {
