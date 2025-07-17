@@ -53,6 +53,7 @@ let currentBasemap = 'default';
 let torchOn = false;
 let modalShow = false;
 let homeModalShow = false;
+let circleScalingFactor = 300;
 
 // Additional layers
 L.control.rainviewer({
@@ -446,7 +447,7 @@ fetch('cannons-new.json')
                     
                     if (lat !== null && lng !== null && !isNaN(lat) && !isNaN(lng)) {
                         const circle = L.circle([lat, lng], {
-                            radius: numCannons * 60, // radius here
+                            radius: Math.pow(numCannons, 0.57) * circleScalingFactor, // radius here
                             fillColor: '#f03',
                             color: 'red',
                             weight: 2,
@@ -640,7 +641,7 @@ fetch('cannons-adjusted.json')
 
                     if (lat !== null && lng !== null && !isNaN(lat) && !isNaN(lng)) {
                         const circle = L.circle([lat, lng], {
-                            radius: 50 * 60,
+                            radius: 10 * circleScalingFactor,
                             fillColor: 'lightgrey',
                             color: 'black',
                             weight: 2,
