@@ -1,9 +1,10 @@
-section scrolling bug
+aadi:
+section scrolling bug, scrolling up from 3 goes to start of 2
 mobile responsiveness: modal (heading only)
 home modal esc
-ideal basemap
 optimise code
-menu nav bug
-opening Arzignano bug
-When page reloads and I click on 3, I sometimes get 2
-scrolling up from 3 goes to start of 2
+menu nav bug, opening Arzignano bug, When page reloads and I click on 3, I sometimes get 2
+explore page
+
+luca:
+ideal basemap
