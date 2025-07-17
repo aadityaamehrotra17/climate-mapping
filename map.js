@@ -474,9 +474,9 @@ fetch('cannons-new.json')
                 displayCannonsByYear(cannonsNew, 1899);
             }
         });
-        document.getElementById('text').addEventListener('click', function(event) {
+        document.getElementById('text').addEventListener('mouseover', function(event) {
             if (event.target.id === 'link-3-2-1') {
-                flyToAndClear([45.5218, 11.3355], 10);
+                flyToAndClear([45.4384, 10.9917], 7.3);
                 displayCannonsByYear(cannonsNew, 1899);
             }
         });
@@ -668,7 +668,7 @@ fetch('cannons-adjusted.json')
                 displayMissingCannonsByYear(cannonsAdjusted, 1899);
             }
         });
-        document.getElementById('text').addEventListener('click', function(event) {
+        document.getElementById('text').addEventListener('mouseover', function(event) {
             if (event.target.id === 'link-3-2-1') {
                 displayMissingCannonsByYear(cannonsAdjusted, 1899);
             }
@@ -903,10 +903,13 @@ function displayVideo(index) {
 //     }
 // });
 
+// Torch feature
+
 function showTorchAtLatLng(lat, lng) {
+    if (torchOn) return;
+
     var torch = document.getElementById('torch');
     var mapContainer = document.getElementById('map');
-    if (!torch) return;
 
     // Convert lat/lng to container point (pixel coordinates)
     const point = map.latLngToContainerPoint([lat, lng]);
@@ -925,15 +928,30 @@ function showTorchAtLatLng(lat, lng) {
     torchOn = true;
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    document.addEventListener('keydown', function(event) {
-        if (event.keyCode === 84) {
-            showTorchAtLatLng(28.7041, 77.1025);
-        }
-    });
+function hideTorch() {
+    if (!torchOn) return;
+
+    var torch = document.getElementById('torch');
+
+    torch.style.zIndex = '-10000';
+    torch.style.opacity = '0';
+    torchOn = false;
+}
+
+document.getElementById('text').addEventListener('mouseover', function(event) {
+    if (event.target.id === 'link-3-2-1') {
+        map.once('moveend', function() {
+            showTorchAtLatLng(45.5218, 11.3355);
+        });
+    }
 });
 
-// Torch feature
+document.getElementById('text').addEventListener('mouseout', function(event) {
+    if (event.target.id === 'link-3-2-1') {
+        hideTorch();
+    }
+});
+
 // function torchToggle() {
 //     var torch = document.getElementById('torch');
 //     var mapContainer = document.getElementById('map'); // Assuming your map container has the ID 'map'
