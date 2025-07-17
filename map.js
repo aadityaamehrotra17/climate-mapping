@@ -160,7 +160,7 @@ var CustomControl = L.Control.extend({
             panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
         });
 
-        // Control Panel
+        // Control Panelll
         var panel = L.DomUtil.create('div', 'control-panel', container);
         panel.style.display = 'none'; // Ensure it starts hidden
 
