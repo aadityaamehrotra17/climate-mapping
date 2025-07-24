@@ -83,6 +83,49 @@ qButton.onAdd = function (map) {
 };
 qButton.addTo(map);
 
+// Legend stuff
+
+var legendControl = L.control({ position: 'bottomright' });
+legendControl.onAdd = function(map) {
+    var div = L.DomUtil.create('div');
+    div.id = 'cannonsLegend';
+    div.innerHTML = `
+        <div style="display: flex; align-items: center; margin-bottom: 6px;">
+            <span style="
+                display: inline-block;
+                width: 16px;
+                height: 16px;
+                border-radius: 50%;
+                background: #f03;
+                border: 2px solid red;
+                margin-right: 8px;
+            "></span>
+            <span>Cannon Count Known</span>
+        </div>
+        <div style="display: flex; align-items: center;">
+            <span style="
+                display: inline-block;
+                width: 16px;
+                height: 16px;
+                border-radius: 50%;
+                background: lightgrey;
+                border: 2px solid black;
+                margin-right: 8px;
+            "></span>
+            <span>Cannon Count Unknown</span>
+        </div>
+    `;
+    return div;
+};
+legendControl.addTo(map);
+
+function showCannonsLegend(show) {
+    const cLegend = document.getElementById('cannonsLegend');
+    if (cLegend) {
+        cLegend.style.display = show ? 'block' : 'none'; // Show or hide the legend
+    }
+}
+
 // Cannons Label
 var labelControl = L.control({ position: 'topleft' });
 labelControl.onAdd = function(map) {
@@ -306,6 +349,7 @@ let cannonsSetMissing = false;
 function flyToAndClear(coords, zoom) {
     map.flyTo(coords, zoom);
     showYearLabel('');
+    showCannonsLegend(false);
     if (circleExists) {
         map.removeLayer(circle);
         circleExists = false;
@@ -656,6 +700,7 @@ fetch('cannons-adjusted.json')
             });
             cannonsSetMissing = true;
             showYearLabel(`${year}`);
+            showCannonsLegend(true);
         }
 
         document.getElementById('text').addEventListener('click', function(event) {

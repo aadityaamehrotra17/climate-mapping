@@ -220,6 +220,15 @@ button:disabled, button:disabled:hover {
     display: none;
 }
 
+#cannonsLegend {
+    background: white;
+    padding: 8px 14px;
+    border-radius: 6px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.3);
+    font-size: 15px;
+    display: none;
+}
+
 #qButton:hover {
     cursor: pointer;
     background-color: darkgray;
