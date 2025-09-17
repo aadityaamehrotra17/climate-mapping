@@ -7,6 +7,6 @@ function removeNullEntries(obj) {
     );
 }
 
-// const cleaned = removeNullEntries(cannons_new["Longitude"]);
+// const cleaned = removeNullEntries(cannons_new["Longitude"])
 
 fs.writeFileSync('cleaned.json', JSON.stringify(cleaned, null, 2));
