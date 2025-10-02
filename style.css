@@ -220,6 +220,19 @@ button:disabled, button:disabled:hover {
     display: none;
 }
 
+#yearDropdown {
+    font-size: 16px;
+    font-weight: 600;
+    background: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.3);
+}
+
+#yearDropdown:hover {
+    cursor: pointer;
+}
+
 #cannonsLegend {
     background: white;
     padding: 8px 14px;
@@ -227,6 +240,23 @@ button:disabled, button:disabled:hover {
     box-shadow: 0 1px 5px rgba(0,0,0,0.3);
     font-size: 15px;
     display: none;
+}
+
+#exploreButton {
+    display: flex;
+    background-color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 20px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.3);
+    align-items: center;
+    justify-content: center;
+}
+
+#exploreButton:hover {
+    cursor: pointer;
+    background-color: lightgray;
 }
 
 #qButton:hover {
@@ -292,6 +322,10 @@ color: olivedrab;
     color: yellowgreen;
 }
 
+.shaded-button {
+    color: sienna;
+}
+
 .leaflet-spotlight-container.circle {
     border-radius: 50%;
 }
@@ -319,6 +353,10 @@ color: olivedrab;
 
 .stadia-map .leaflet-tile {
     filter: saturate(0.3);
+}
+
+.shaded-relief .leaflet-tile {
+    filter: saturate(1);
 }
 
 .esri-map .leaflet-tile {

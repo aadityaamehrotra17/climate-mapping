@@ -20,12 +20,19 @@ var esriMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/
 	maxZoom: 9,
     minZoom: 2
 });
+var shadedRelief = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Shaded_Relief/MapServer/tile/{z}/{y}/{x}', {
+	attribution: 'Tiles &copy; Esri &mdash; Source: Esri',
+	maxZoom: 13,
+    minZoom: 2
+});
 defaultMap.addTo(map);
 map.removeLayer(defaultMap);
 stadiaMap.addTo(map);
 map.removeLayer(stadiaMap);
 esriMap.addTo(map);
 map.removeLayer(esriMap);
+shadedRelief.addTo(map);
+map.removeLayer(shadedRelief);
 defaultMap.addTo(map);
 
 // Assign CSS classes more effectively
@@ -40,6 +47,7 @@ function assignTileClass(mapLayer, className) {
 assignTileClass(defaultMap, 'default-map');
 assignTileClass(stadiaMap, 'stadia-map');
 assignTileClass(esriMap, 'esri-map');
+assignTileClass(shadedRelief, 'shaded-relief');
 
 // Initialize variables
 let circleExists = false;
@@ -54,6 +62,8 @@ let torchOn = false;
 let modalShow = false;
 let homeModalShow = false;
 let circleScalingFactor = 300;
+let exploreOn = false;
+const dropdownYears = [1896, 1899, 1900, 1901, 1902, 1903, 1904, 1912];
 
 // Additional layers
 L.control.rainviewer({
@@ -126,6 +136,50 @@ function showCannonsLegend(show) {
     }
 }
 
+// Explore stuff
+function explorefunc() {
+    if (!exploreOn) {
+        exploreOn = true;
+        document.getElementById('exploreButton').style.backgroundColor = 'lightgreen';
+        document.getElementById('text-column-id').style.display = 'none';
+        document.getElementById('map-column-id').style.width = '100%';
+        map.invalidateSize();
+        
+        createYearDropdown();
+    } else {
+        exploreOn = false;
+        document.getElementById('yearDropdownContainer').style.display = 'none';
+        document.getElementById('exploreButton').style.backgroundColor = 'white';
+        document.getElementById('text-column-id').style.display = 'block';
+        document.getElementById('map-column-id').style.width = '70%';
+        map.invalidateSize();
+    }
+}
+
+var exploreControl = L.control({ position: 'topleft' });
+exploreControl.onAdd = function(map) {
+    var div = L.DomUtil.create('div');
+    div.id = 'explore-control';
+    div.innerHTML = `<button id="exploreButton"><i class="fa fa-compass"></i></button>`;
+    div.style.display = 'none'; // Start hidden
+    return div;
+};
+exploreControl.addTo(map);
+
+document.addEventListener('DOMContentLoaded', function() {
+    const exploreButton = document.getElementById('exploreButton');
+    if (exploreButton) {
+        exploreButton.addEventListener('click', explorefunc);
+    }
+});
+
+function showExploreControl(show) {
+    const eControl = document.getElementById('explore-control');
+    if (eControl) {
+        eControl.style.display = show ? 'block' : 'none'; // Show or hide the control
+    }
+}
+
 // Cannons Label
 var labelControl = L.control({ position: 'topleft' });
 labelControl.onAdd = function(map) {
@@ -135,6 +189,24 @@ labelControl.onAdd = function(map) {
     return div;
 };
 labelControl.addTo(map);
+
+// Dropdown for years
+var yearDropdownControl = L.control({ position: 'topleft' });
+yearDropdownControl.onAdd = function(map) {
+    var div = L.DomUtil.create('div');
+    div.id = 'yearDropdownContainer';
+    div.innerHTML = '<select id="yearDropdown"></select>';
+    div.style.display = 'none'; // Start hidden
+    return div;
+};
+yearDropdownControl.addTo(map);
+
+dropdownYears.forEach(year => {
+        const option = document.createElement('option');
+        option.value = year;
+        option.textContent = year;
+        document.getElementById('yearDropdown').appendChild(option);
+    });
 
 function showYearLabel(year) {
     const label = document.getElementById('yearlabel');
@@ -147,6 +219,24 @@ function showYearLabel(year) {
             label.style.display = 'none';
         }
     }
+}
+
+function createYearDropdown() {
+    const select = document.getElementById('yearDropdown');
+    document.getElementById('yearDropdownContainer').style.display = 'block';
+
+    const label = document.getElementById('yearlabel');
+    if (label && label.textContent) {
+        const match = label.textContent.match(/(\d{4})/);
+        if (match) {
+            select.value = match[1];
+        }
+    }
+
+    select.addEventListener('change', function() {
+        window.displayCannonsByYear(window.cannonsNew, this.value);
+        window.displayMissingCannonsByYear(window.cannonsAdjusted, this.value);
+    });
 }
 
 // james code
@@ -319,11 +409,17 @@ function mapSwitch() {
         currentBasemap = 'esri';
         document.getElementById('basemapToggle').classList.remove('stadia-button');
         document.getElementById('basemapToggle').classList.add('esri-button');
-    } else {
+    } else if (currentBasemap === 'esri') {
         map.removeLayer(esriMap);
+        shadedRelief.addTo(map);
+        currentBasemap = 'shadedRelief';
+        document.getElementById('basemapToggle').classList.remove('esri-button');
+        document.getElementById('basemapToggle').classList.add('shaded-button');
+    } else {
+        map.removeLayer(shadedRelief);
         defaultMap.addTo(map);
         currentBasemap = 'default';
-        document.getElementById('basemapToggle').classList.remove('esri-button');
+        document.getElementById('basemapToggle').classList.remove('shaded-button');
         document.getElementById('basemapToggle').classList.add('default-button');
     }
 }
@@ -350,6 +446,7 @@ function flyToAndClear(coords, zoom) {
     map.flyTo(coords, zoom);
     showYearLabel('');
     showCannonsLegend(false);
+    showExploreControl(false);
     if (circleExists) {
         map.removeLayer(circle);
         circleExists = false;
@@ -465,6 +562,7 @@ document.querySelectorAll('.menu a').forEach((menuLink, index) => {
 fetch('cannons-new.json')
     .then(response => response.json())
     .then(cannonsNew => {
+        window.cannonsNew = cannonsNew;
 
         const latitudes = cannonsNew["Latitude"];
         const longitudes = cannonsNew["Longitude"];
@@ -476,11 +574,10 @@ fetch('cannons-new.json')
 
             const cannonsForYear = cannonsNew[`Cannons in ${year}`];
 
-            // if (!cannonsForYear) {
-            //     alert(`No data for year ${year}`);
-            //     cannonsSetNew = false;
-            //     return;
-            // }
+            if (!cannonsForYear) {
+                cannonsSetNew = false;
+                return;
+            }
 
             Object.keys(cannonsForYear).forEach(idx => {
                 const numCannons = cannonsForYear[idx];
@@ -511,6 +608,7 @@ fetch('cannons-new.json')
 
             cannonsSetNew = true;
         }
+        window.displayCannonsByYear = displayCannonsByYear;
     
 
         document.getElementById('text').addEventListener('click', function(event) {
@@ -663,6 +761,8 @@ fetch('cannons-new.json')
 fetch('cannons-adjusted.json')
     .then(response => response.json())
     .then(cannonsAdjusted => {
+        window.cannonsAdjusted = cannonsAdjusted;
+
         function displayMissingCannonsByYear(cannonsAdjusted, year) {
             missingCannonsList.forEach(layer => map.removeLayer(layer));
             missingCannonsList = [];
@@ -672,7 +772,7 @@ fetch('cannons-adjusted.json')
                 for (let i = parseFloat(entry["Earliest Year"]); i <= parseFloat(entry["Latest Year"]); i++) {
                     yearsArr.push(i);
                 }
-                const hasYear = yearsArr.includes(year);
+                const hasYear = yearsArr.includes(Number(year));
 
                 const cannonsField = `Cannons in ${year}`;
                 const cannonsValue = entry.hasOwnProperty(cannonsField) ? entry[cannonsField] : undefined;
@@ -701,7 +801,9 @@ fetch('cannons-adjusted.json')
             cannonsSetMissing = true;
             showYearLabel(`${year}`);
             showCannonsLegend(true);
+            showExploreControl(true);
         }
+        window.displayMissingCannonsByYear = displayMissingCannonsByYear;
 
         document.getElementById('text').addEventListener('click', function(event) {
             if (event.target.id === 'link-3-1') {
