@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const chapterRect = currentChapter.getBoundingClientRect();
             const containerRect = textContainer.getBoundingClientRect();
             const chapterHeight = chapterRect.height;
-            const scrollPosition = containerRect.top - chapterRect.top;
+            const scrollPosition = containerRect.bottom - chapterRect.top;
             const progress = (scrollPosition / chapterHeight) * 100;
             progressBar.style.width = Math.max(0, Math.min(100, progress)) + '%';
         } else {
