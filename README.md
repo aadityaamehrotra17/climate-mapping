@@ -20,4 +20,4 @@ git clone https://github.com/aadityaamehrotra17/climate-mapping.git
 cd climate-mapping
 
 # Open in browser
-Use a live server or simply open index.html on any browser
+# Use a live server or simply open index.html on any browser
